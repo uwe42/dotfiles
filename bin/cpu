@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# outputs load average 1 min
+
+#echo "CPU " `uptime | cut -d " " -f13 | cut -c -4` "%"
+top -b -n 1 | head -n 3 | tail -n 1|awk '{printf "%3d%%\n", $3}'

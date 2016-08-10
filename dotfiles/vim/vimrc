@@ -1,0 +1,98 @@
+" give us 256 color schemes!
+set term=screen-256color
+
+" give us nice EOL (end of line) characters
+set list
+set listchars=tab:▸\ ,eol:¬
+
+" mandatory defaults
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" --------------------------------------
+" my plugins
+
+Plugin 'gmarik/Vundle.vim'       " vundle
+Plugin 'flazz/vim-colorschemes'  " nice colors!
+Plugin 'scrooloose/nerdTree'     " tree file stuckture
+Plugin 'ntpeters/vim-better-whitespace' "see tailing whitespaces
+Plugin 'airblade/vim-gitgutter'  " gitgutter
+Plugin 'vim-airline/vim-airline' " statusbar (git branch and stuff)
+Plugin 'tpope/vim-fugitive'      " git integration
+
+" code snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+Plugin 'majutsushi/tagbar'       " tagging and stuff
+
+" autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'yggdroot/indentline'
+Plugin 'gregsexton/gitv'
+Plugin 'terryma/vim-multiple-cursors'
+
+"--------------------------------------
+
+call vundle#end()
+
+filetype plugin indent on
+
+syntax on                             "syntax hightghting always on
+colorscheme up                        "config colorscheme
+autocmd BufWritePre * StripWhitespace "whitespaces on by defult
+
+"set columns=80                        "set 80 line indication
+
+" 80 line indication
+let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(400,999),",")
+
+" show curser line
+set cursorline
+
+" make tabs behave like it should be
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+"NerdTree on by defult
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+
+"Close NERDTree if it is the last open buffer
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+nmap <F8> :TagbarToggle<CR>
+
+" remap snippeds
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+
+let g:indentLine_char = '⁞'
+
+" fixing the home and end key
+imap <esc>OH <esc>0i
+cmap <esc>OH <home>
+nmap <esc>OH 0
+nmap <esc>OF $
+imap <esc>OF <esc>$a
+cmap <esc>OF <end>
+

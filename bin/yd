@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# downloads mp3 from youtube
+
+youtube-dl -x --audio-quality 0 --audio-format mp3 $1
