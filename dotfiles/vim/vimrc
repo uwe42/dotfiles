@@ -1,6 +1,9 @@
 " give us 256 color schemes!
 set term=screen-256color
 
+scriptencoding utf-8
+set encoding=utf-8
+
 " give us nice EOL (end of line) characters
 set list
 set listchars=tab:▸\ ,eol:¬
