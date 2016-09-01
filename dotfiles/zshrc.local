@@ -7,6 +7,9 @@ export PATH=/home/${USER}/bin:$PATH
 # aliases:
 # ----------------------------------------------------------------------------
 alias reload!='source ~/.zshrc'
+
+alias ld='ls -dl */'
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."
